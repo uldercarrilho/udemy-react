@@ -15,6 +15,6 @@ console.log(num1, num3);
 
 // OBJECT DESTRUCTURING
 
-// {name} = {name: 'Ulder', age: 38}
-// console.log(name);  // Ulder
-// console.log(age)    // undefined
+const {name} = {name: 'Ulder', age: 38}
+console.log(name);  // Ulder
+console.log(age);   // ReferenceError: age is not defined
