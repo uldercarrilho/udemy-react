@@ -17,4 +17,16 @@ console.log(num1, num3);
 
 const {name} = {name: 'Ulder', age: 38}
 console.log(name);  // Ulder
-console.log(age);   // ReferenceError: age is not defined
+// console.log(age);   // ReferenceError: age is not defined
+
+
+const printName = (personObj) => {
+    console.log(personObj.name);
+}
+printName({name: 'Ulder', age: 38});
+
+
+const printName2 = ({name}) => {
+    console.log(name);
+}
+printName2({name: 'Ulder', age: 38});
