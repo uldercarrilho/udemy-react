@@ -2,8 +2,10 @@
 // 17. Classes, Properties and Methods
 
 class Human {
+    // Properties are like "variables attached to classes/objects"
     gender = 'undefined';
 
+    // methods are like "functions attached to classes/objects"
     printGender = () => {
         console.log(this.gender);
     }
