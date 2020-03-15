@@ -56,15 +56,15 @@ function App() {
   );
   */
 
-  /*
   return (
     <Stateful />
   );
-  */
 
+  /*
   return (
     <FunctionComponent />
   )
+  */
 }
 
 export default App;
