@@ -37,12 +37,26 @@ class Stateful extends Component {
     }
 
     render() {
+        // inline style
+        // this is recommend only if style is applied only this single element and not shared around the app
+        const styleButton = {
+            // the properties can't use '-' in the name because JS syntax, instead the name is capitalized
+            // restrict the full power of .css files
+            backgroundColor: 'white',
+            font: 'inherit',
+            border: '1px solid blue',
+            padding: '8px',
+            cursor: 'pointer'
+        };
+
         return (
             <div className="App">
             <h1>Hi, I'm a React App</h1>
             <p>This is really working!</p>
             { /* in HTML events are always lowercase like 'onclick', but in JSX use like 'onClick' */ }
-            <button onClick={this.switchNameHandler.bind(this, 'Uder Carrilho Júnior')}>Switch Name</button>
+            <button 
+                style={styleButton}
+                onClick={this.switchNameHandler.bind(this, 'Uder Carrilho Júnior')}>Switch Name</button>
             <Person 
                 name={this.state.persons[0].name} 
                 age={this.state.persons[0].age} 
