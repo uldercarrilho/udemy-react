@@ -25,6 +25,17 @@ class Stateful extends Component {
         });
     }
 
+    // the parameter 'event' is passed automatic by React
+    nameChangedHandler = (event) => {
+        this.setState({
+            persons: [
+                { name: 'Ulder', age: 38 },
+                { name: event.target.value, age: 32 },
+                { name: "Graziele", age: 36 }
+            ]
+        });
+    }
+
     render() {
         return (
             <div className="App">
@@ -42,8 +53,8 @@ class Stateful extends Component {
                 click={this.switchNameHandler.bind(this, 'Júnior')
                 /* click={this.switchNameHandler} // don't pass a method reference to change de state
                    click={() => this.switchNameHandler('Juninho')} // React can't render certain things
-                */
-                }
+                */}
+                changed={this.nameChangedHandler}
             >My hobbies: Racing</Person>
             <Person 
                 name={this.state.persons[2].name} 
