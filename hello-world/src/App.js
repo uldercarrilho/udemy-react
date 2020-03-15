@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  /*
+  // original source code created by 'yarn create react-app'
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +23,19 @@ function App() {
         </a>
       </header>
     </div>
+  );
+  */
+
+  // this function can has only one 'html' element
+  return (
+    // this code is JSX
+    // can't use 'class' attribute because is a reserved word, instead use 'className' from JSX attribute
+    <div className="App">
+      <h1>Hi, I'm a React App</h1>
+    </div>
+
+    // the JSX is transpilated to this:
+    // React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App'))
   );
 }
 
