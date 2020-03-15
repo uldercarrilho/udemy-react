@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Person from './Person/Person';
 
 function App() {
   /*
@@ -32,6 +33,10 @@ function App() {
     // can't use 'class' attribute because is a reserved word, instead use 'className' from JSX attribute
     <div className="App">
       <h1>Hi, I'm a React App</h1>
+      <p>This is really working!</p>
+      <Person name="Ulder" age="38" />
+      <Person name="Mônica" age="32">My hobbies: Racing</Person>
+      <Person name="Graziele" age="36" />
     </div>
 
     // the JSX is transpilated to this:
