@@ -40,7 +40,9 @@ class Stateful extends Component {
                 name={this.state.persons[1].name} 
                 age={this.state.persons[1].age}
                 click={this.switchNameHandler.bind(this, 'Júnior')
-                /* click=this.switchNameHandler // don't pass a method reference to change de state */
+                /* click={this.switchNameHandler} // don't pass a method reference to change de state
+                   click={() => this.switchNameHandler('Juninho')} // React can't render certain things
+                */
                 }
             >My hobbies: Racing</Person>
             <Person 
