@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
 import Stateful from './Stateful/Stateful';
+import FunctionComponent from './FunctionComponent/FunctionComponent';
 
 function App() {
   /*
@@ -55,9 +56,15 @@ function App() {
   );
   */
 
+  /*
   return (
     <Stateful />
   );
+  */
+
+  return (
+    <FunctionComponent />
+  )
 }
 
 export default App;

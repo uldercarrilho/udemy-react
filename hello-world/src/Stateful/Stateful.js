@@ -15,6 +15,7 @@ class Stateful extends Component {
     switchNameHandler = () => {
         // console.log("Was clicked!");
         // DON'T DO THIS: this.state.persons[0].name = "Ulder Carrilho Júnior";
+        // the method 'this.setState' MERGE the object 'state'
         this.setState(
             {
                 persons: [
