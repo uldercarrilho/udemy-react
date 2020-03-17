@@ -8,7 +8,8 @@ class Stateful extends Component {
             { name: "Mônica", age: 32 },
             { name: "Graziele", age: 36 }
         ],
-        otherState: "some other value"
+        otherState: "some other value",
+        showPersons: false
     };
 
     // by convention, use suffix 'Handler' for methods who are called by events
@@ -36,6 +37,11 @@ class Stateful extends Component {
         });
     }
 
+    togglePersons = () => {
+        const doesShow = this.state.showPersons;
+        this.setState({showPersons: !doesShow});
+    }
+
     render() {
         // inline style
         // this is recommend only if style is applied only this single element and not shared around the app
@@ -49,31 +55,41 @@ class Stateful extends Component {
             cursor: 'pointer'
         };
 
+        let persons = null;
+        if (this.state.showPersons) {
+            persons = (
+            <div>
+                <Person 
+                name={this.state.persons[0].name} 
+                age={this.state.persons[0].age} 
+                />
+                <Person 
+                    name={this.state.persons[1].name} 
+                    age={this.state.persons[1].age}
+                    click={this.switchNameHandler.bind(this, 'Júnior')
+                    /* click={this.switchNameHandler} // don't pass a method reference to change de state
+                    click={() => this.switchNameHandler('Juninho')} // React can't render certain things
+                    */}
+                    changed={this.nameChangedHandler}
+                >My hobbies: Racing</Person>
+                <Person 
+                    name={this.state.persons[2].name} 
+                    age={this.state.persons[2].age} 
+                />
+            </div>
+            );
+        }
+
         return (
-            <div className="App">
+          <div className="App">
             <h1>Hi, I'm a React App</h1>
             <p>This is really working!</p>
             { /* in HTML events are always lowercase like 'onclick', but in JSX use like 'onClick' */ }
             <button 
                 style={styleButton}
                 onClick={this.switchNameHandler.bind(this, 'Uder Carrilho Júnior')}>Switch Name</button>
-            <Person 
-                name={this.state.persons[0].name} 
-                age={this.state.persons[0].age} 
-            />
-            <Person 
-                name={this.state.persons[1].name} 
-                age={this.state.persons[1].age}
-                click={this.switchNameHandler.bind(this, 'Júnior')
-                /* click={this.switchNameHandler} // don't pass a method reference to change de state
-                   click={() => this.switchNameHandler('Juninho')} // React can't render certain things
-                */}
-                changed={this.nameChangedHandler}
-            >My hobbies: Racing</Person>
-            <Person 
-                name={this.state.persons[2].name} 
-                age={this.state.persons[2].age} 
-            />
+            <button onClick={this.togglePersons}>Toogle Persons</button>
+            {persons}
           </div>
         );
     }
