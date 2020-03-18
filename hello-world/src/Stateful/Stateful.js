@@ -4,9 +4,9 @@ import Person from '../Person/Person';
 class Stateful extends Component {
     state = {
         persons: [
-            { name: "Ulder", age: 38 },
-            { name: "Mônica", age: 32 },
-            { name: "Graziele", age: 36 }
+            { id: 1, name: "Ulder", age: 38 },
+            { id: 2, name: "Mônica", age: 32 },
+            { id: 3, name: "Graziele", age: 36 }
         ],
         otherState: "some other value",
         showPersons: false
@@ -55,28 +55,42 @@ class Stateful extends Component {
             cursor: 'pointer'
         };
 
+        // SIMPLE IMPLEMENTATION
+        // 
+        // let persons = null;
+        // if (this.state.showPersons) {
+        //     persons = (
+        //     <div>
+        //         <Person 
+        //         name={this.state.persons[0].name} 
+        //         age={this.state.persons[0].age} 
+        //         />
+        //         <Person 
+        //             name={this.state.persons[1].name} 
+        //             age={this.state.persons[1].age}
+        //             click={this.switchNameHandler.bind(this, 'Júnior')
+        //             /* click={this.switchNameHandler} // don't pass a method reference to change de state
+        //             click={() => this.switchNameHandler('Juninho')} // React can't render certain things
+        //             */}
+        //             changed={this.nameChangedHandler}
+        //         >My hobbies: Racing</Person>
+        //         <Person 
+        //             name={this.state.persons[2].name} 
+        //             age={this.state.persons[2].age} 
+        //         />
+        //     </div>
+        //     );
+        // }
+
+        // 56. USING OUTPUTTING LISTS
         let persons = null;
         if (this.state.showPersons) {
             persons = (
-            <div>
-                <Person 
-                name={this.state.persons[0].name} 
-                age={this.state.persons[0].age} 
-                />
-                <Person 
-                    name={this.state.persons[1].name} 
-                    age={this.state.persons[1].age}
-                    click={this.switchNameHandler.bind(this, 'Júnior')
-                    /* click={this.switchNameHandler} // don't pass a method reference to change de state
-                    click={() => this.switchNameHandler('Juninho')} // React can't render certain things
-                    */}
-                    changed={this.nameChangedHandler}
-                >My hobbies: Racing</Person>
-                <Person 
-                    name={this.state.persons[2].name} 
-                    age={this.state.persons[2].age} 
-                />
-            </div>
+                <div>
+                    {this.state.persons.map(person => {
+                        return <Person key={person.id} name={person.name} age={person.age} />
+                    })}
+                </div>
             );
         }
 
