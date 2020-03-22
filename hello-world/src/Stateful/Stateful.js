@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import Person from '../Person/Person';
 import ValidationComponent from '../ValidationComponent';
 import CharComponent from '../CharComponent';
@@ -97,7 +98,11 @@ class Stateful extends Component {
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            ':hover': {
+                backgroundColor: 'lightgreen',
+                color: 'black'
+            }
         };
 
         // SIMPLE IMPLEMENTATION
@@ -144,6 +149,10 @@ class Stateful extends Component {
             );
 
             styleButton.backgroundColor = 'red';
+            styleButton[':hover'] = {
+                backgroundColor: 'salmon',
+                color: 'black'
+            }
         }
 
         const classes = [];
@@ -176,4 +185,4 @@ class Stateful extends Component {
     }
 }
 
-export default Stateful;
+export default Radium(Stateful);
