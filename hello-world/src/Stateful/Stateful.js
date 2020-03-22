@@ -93,7 +93,7 @@ class Stateful extends Component {
         const styleButton = {
             // the properties can't use '-' in the name because JS syntax, instead the name is camelCase
             // restrict the full power of .css files
-            backgroundColor: 'white',
+            backgroundColor: 'green',
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
@@ -142,6 +142,8 @@ class Stateful extends Component {
                     })}
                 </div>
             );
+
+            styleButton.backgroundColor = 'red';
         }
 
         
@@ -159,7 +161,7 @@ class Stateful extends Component {
             {/* <button 
                 style={styleButton}
                 onClick={this.switchNameHandler.bind(this, 'Uder Carrilho Júnior')}>Switch Name</button> */}
-            <button onClick={this.togglePersonsHandler}>Toogle Persons</button>
+            <button style={styleButton} onClick={this.togglePersonsHandler}>Toogle Persons</button>
             {persons}
           </div>
         );
