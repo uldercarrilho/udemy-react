@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Person from '../Person/Person';
+import ValidationComponent from '../ValidationComponent';
+import CharComponent from '../CharComponent';
 
 class Stateful extends Component {
     state = {
@@ -9,7 +11,9 @@ class Stateful extends Component {
             { id: 3, name: "Graziele", age: 36 }
         ],
         otherState: "some other value",
-        showPersons: false
+        showPersons: false,
+        text: '',
+        textLength: 0
     };
 
     // by convention, use suffix 'Handler' for methods who are called by events
@@ -27,26 +31,67 @@ class Stateful extends Component {
     }
 
     // the parameter 'event' is passed automatic by React
-    nameChangedHandler = (event) => {
-        this.setState({
-            persons: [
-                { name: 'Ulder', age: 38 },
-                { name: event.target.value, age: 32 },
-                { name: "Graziele", age: 36 }
-            ]
+    nameChangedHandler = (event, id) => {
+        const personIndex = this.state.persons.findIndex(p => {
+            return p.id === id
         });
+        const person = {
+            ...this.state.persons[personIndex]
+        }
+        // alternative way to create a new copy of object
+        // const person = Object.assign({}, this.state.persons[personIndex]);
+
+        person.name = event.target.value;
+
+        const newPersons = [...this.state.persons];
+        newPersons[personIndex] = person;
+        this.setState( {persons: newPersons} );
     }
 
-    togglePersons = () => {
+    deletePersonsHandler = (personIndex) => {
+        // const persons = this.state.persons.slice(); // create a copy of array
+        const persons = [...this.state.persons]; // copy array using spread operator
+        persons.splice(personIndex, 1);
+        this.setState({persons: persons});
+    }
+
+    inputTextOnChangeHandler = (event) => {
+        this.setState({text: event.target.value});
+        this.setState({textLength: event.target.value.length});
+    };
+
+    togglePersonsHandler = () => {
         const doesShow = this.state.showPersons;
         this.setState({showPersons: !doesShow});
-    }
+    };
+
+    removeCharComponent = (index) => {
+        let copyText = this.state.text.split('');
+        copyText.splice(index, 1);
+        this.setState({text: copyText.join('')});
+    };
+
+    renderCharComponents = () => {
+        let arrayCharComponent = new Array(0);
+
+        for (let i = 0; i < this.state.text.length; i++) {
+            const element = this.state.text[i];
+            const charComponent = <CharComponent key={i} letter={element} click={() => this.removeCharComponent(i)} />
+            arrayCharComponent.push(charComponent);
+        }
+
+        return (
+            <div>
+                {arrayCharComponent}
+            </div>
+        );
+    };
 
     render() {
         // inline style
         // this is recommend only if style is applied only this single element and not shared around the app
         const styleButton = {
-            // the properties can't use '-' in the name because JS syntax, instead the name is capitalized
+            // the properties can't use '-' in the name because JS syntax, instead the name is camelCase
             // restrict the full power of .css files
             backgroundColor: 'white',
             font: 'inherit',
@@ -87,22 +132,34 @@ class Stateful extends Component {
         if (this.state.showPersons) {
             persons = (
                 <div>
-                    {this.state.persons.map(person => {
-                        return <Person key={person.id} name={person.name} age={person.age} />
+                    {this.state.persons.map((person, index) => {
+                        return <Person 
+                            click={() => this.deletePersonsHandler(index)}
+                            changed={(event) => this.nameChangedHandler(event, person.id)}
+                            key={person.id} 
+                            name={person.name} 
+                            age={person.age} />
                     })}
                 </div>
             );
         }
 
+        
         return (
           <div className="App">
             <h1>Hi, I'm a React App</h1>
             <p>This is really working!</p>
+
+            <input type='text' onChange={(event) => this.inputTextOnChangeHandler(event)} />
+            <p>Text length is {this.state.textLength}</p>
+            <ValidationComponent textLength={this.state.textLength} />
+            {this.renderCharComponents()}
+
             { /* in HTML events are always lowercase like 'onclick', but in JSX use like 'onClick' */ }
-            <button 
+            {/* <button 
                 style={styleButton}
-                onClick={this.switchNameHandler.bind(this, 'Uder Carrilho Júnior')}>Switch Name</button>
-            <button onClick={this.togglePersons}>Toogle Persons</button>
+                onClick={this.switchNameHandler.bind(this, 'Uder Carrilho Júnior')}>Switch Name</button> */}
+            <button onClick={this.togglePersonsHandler}>Toogle Persons</button>
             {persons}
           </div>
         );
