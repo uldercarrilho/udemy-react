@@ -3,6 +3,7 @@ import Radium, { StyleRoot } from 'radium';
 import Person from '../Person/Person';
 import ValidationComponent from '../ValidationComponent';
 import CharComponent from '../CharComponent';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 class Stateful extends Component {
     state = {
@@ -138,12 +139,11 @@ class Stateful extends Component {
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
-                        return <Person 
+                        return <ErrorBoundary key={person.id}><Person 
                             click={() => this.deletePersonsHandler(index)}
                             changed={(event) => this.nameChangedHandler(event, person.id)}
-                            key={person.id} 
                             name={person.name} 
-                            age={person.age} />
+                            age={person.age} /></ErrorBoundary>
                     })}
                 </div>
             );

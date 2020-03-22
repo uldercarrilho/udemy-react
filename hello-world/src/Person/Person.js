@@ -1,6 +1,7 @@
 import React from 'react';
 import './Person.css'
 import Radium from 'radium';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const person = (props) => {
 
@@ -9,6 +10,14 @@ const person = (props) => {
             width: '450px'
         }
     };
+
+    const rnd = Math.random();
+
+    // https://reactjs.org/docs/error-boundaries.html
+    // UNCOMMENT this code to simulate error catched by ErrorBoundary
+    // if (rnd > 0.7) {
+    //     throw new Error('Something went wrong');
+    // }
 
     return (
         <div className="Person" style={style}>
